@@ -1,25 +1,21 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlinter)
     alias(libs.plugins.detekt)
-    alias(libs.plugins.hilt)
     kotlin("kapt")
 }
 
 android {
-    namespace = "com.jamiescode.grazer"
-    compileSdk = 35
+    namespace = "com.jamiescode.grazer.theme"
+    compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.jamiescode.grazer"
         minSdk = 26
-        targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -35,15 +31,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures {
-        compose = true
-    }
 }
 
 dependencies {
-    implementation(project(":navigation"))
-    implementation(project(":theme"))
-
     // Compose
     implementation(platform(libs.compose.bom))
     implementation(libs.bundles.compose)

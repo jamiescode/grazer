@@ -25,7 +25,7 @@ import com.jamiescode.grazer.navigation.Destinations
 import com.jamiescode.grazer.presentation.composable.grazerTopBar
 import com.jamiescode.grazer.presentation.screen.login.loginScreen
 import com.jamiescode.grazer.presentation.screen.userlist.userListScreen
-import com.jamiescode.grazer.presentation.theme.grazerTheme
+import com.jamiescode.grazer.theme.grazerTheme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
