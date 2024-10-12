@@ -1,6 +1,6 @@
 @file:Suppress("MagicNumber")
 
-package com.jamiescode.grazer.ui.theme
+package com.jamiescode.grazer.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 

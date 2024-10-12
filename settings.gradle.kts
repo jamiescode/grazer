@@ -20,4 +20,7 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Grazer"
-include(":app")
+include(
+    ":app",
+    ":navigation"
+)
