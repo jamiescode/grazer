@@ -1,4 +1,4 @@
-package com.jamiescode.grazer.presentation.screen.login
+package com.jamiescode.grazer.login.presentation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box

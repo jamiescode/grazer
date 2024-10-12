@@ -1,6 +1,6 @@
-package com.jamiescode.grazer.data.repository
+package com.jamiescode.grazer.login.data.repository
 
-import com.jamiescode.grazer.domain.repository.AuthRepository
+import com.jamiescode.grazer.login.domain.repository.AuthRepository
 import javax.inject.Inject
 
 class AuthRepositoryImpl

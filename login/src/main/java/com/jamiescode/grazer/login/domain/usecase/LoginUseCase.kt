@@ -1,4 +1,4 @@
-package com.jamiescode.grazer.domain.usecase
+package com.jamiescode.grazer.login.domain.usecase
 
 import javax.inject.Inject
 

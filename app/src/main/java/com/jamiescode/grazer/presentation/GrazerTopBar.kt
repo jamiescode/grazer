@@ -1,4 +1,4 @@
-package com.jamiescode.grazer.presentation.composable
+package com.jamiescode.grazer.presentation
 
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api

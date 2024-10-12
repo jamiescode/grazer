@@ -1,11 +1,11 @@
-package com.jamiescode.grazer.presentation.screen.login
+package com.jamiescode.grazer.login.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jamiescode.grazer.domain.repository.AuthRepository
-import com.jamiescode.grazer.domain.usecase.LoginUseCase
+import com.jamiescode.grazer.login.domain.repository.AuthRepository
+import com.jamiescode.grazer.login.domain.usecase.LoginUseCase
 import com.jamiescode.grazer.navigation.AppNavigator
 import com.jamiescode.grazer.navigation.Destinations
 import dagger.hilt.android.lifecycle.HiltViewModel
