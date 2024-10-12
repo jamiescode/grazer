@@ -21,7 +21,7 @@ class LoginViewModel
         private val appNavigator: AppNavigator,
     ) : ViewModel() {
         private val stateMutableLiveData: MutableLiveData<State> by lazy {
-            MutableLiveData<State>(State.Initial)
+            MutableLiveData<State>(State.Idle)
         }
         val stateLiveData = stateMutableLiveData as LiveData<State>
 
@@ -29,16 +29,19 @@ class LoginViewModel
             username: String,
             password: String,
         ) {
+            stateMutableLiveData.postValue(State.Loading)
             viewModelScope.launch {
                 loginUseCase.execute(username, password).also {
                     when (it) {
                         is LoginUseCase.Result.Success -> {
+                            stateMutableLiveData.postValue(State.Idle)
                             authRepository.setAuthToken(it.authToken)
                             appNavigator.navigateTo(Destinations.UserList)
                         }
 
                         is LoginUseCase.Result.Error -> {
-                            stateMutableLiveData.postValue(State.Error)
+                            // Get the reason from the api and pass it on
+                            stateMutableLiveData.postValue(State.Error("Credentials are incorrect"))
                         }
                     }
                 }
@@ -46,8 +49,10 @@ class LoginViewModel
         }
 
         sealed class State {
-            data object Initial : State()
+            data object Idle : State()
 
-            data object Error : State()
+            data object Loading : State()
+
+            data class Error(val message: String) : State()
         }
     }
