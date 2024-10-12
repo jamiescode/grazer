@@ -1,4 +1,4 @@
-package com.jamiescode.graze.ui.theme
+package com.jamiescode.grazer.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

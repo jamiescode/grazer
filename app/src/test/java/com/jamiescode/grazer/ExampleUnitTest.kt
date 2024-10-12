@@ -1,4 +1,4 @@
-package com.jamiescode.graze
+package com.jamiescode.grazer
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

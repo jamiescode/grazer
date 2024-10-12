@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Graze"
+rootProject.name = "Grazer"
 include(":app")

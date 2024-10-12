@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace = "com.jamiescode.graze"
+    namespace = "com.jamiescode.grazer"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.jamiescode.graze"
+        applicationId = "com.jamiescode.grazer"
         minSdk = 26
         targetSdk = 34
         versionCode = 1

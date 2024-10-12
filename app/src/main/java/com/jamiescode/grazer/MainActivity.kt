@@ -1,4 +1,4 @@
-package com.jamiescode.graze
+package com.jamiescode.grazer
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,14 +11,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.jamiescode.graze.ui.theme.grazeTheme
+import com.jamiescode.grazer.ui.theme.grazerTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            grazeTheme {
+            grazerTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     greeting(
                         name = "Android",
@@ -44,7 +44,7 @@ fun greeting(
 @Preview(showBackground = true)
 @Composable
 fun greetingPreview() {
-    grazeTheme {
+    grazerTheme {
         greeting("Android")
     }
 }
