@@ -48,7 +48,7 @@ hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 [bundles]
 compose = [
     "compose-activity", "compose-ui", "compose-ui-graphics", "compose-ui-tooling-preview",
-    "compose-ui-test-junit4", "compose-material3", "compose-navigation",
+    "compose-material3", "compose-navigation",
 ]
 composeDebug = [
     "compose-ui-tooling", "compose-ui-test-manifest",
@@ -60,5 +60,5 @@ test = [
     "junit"
 ]
 uitest = [
-    "junit", "androidx-espresso-core",
+    "junit", "compose-ui-test-junit4", "androidx-espresso-core",
 ]
