@@ -24,4 +24,5 @@ include(
     ":app",
     ":navigation",
     ":login",
+    ":theme",
 )

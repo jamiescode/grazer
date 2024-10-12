@@ -20,10 +20,10 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.jamiescode.grazer.login.presentation.loginScreen
 import com.jamiescode.grazer.navigation.AppNavigator
 import com.jamiescode.grazer.navigation.Destinations
-import com.jamiescode.grazer.login.presentation.loginScreen
-import com.jamiescode.grazer.presentation.theme.grazerTheme
+import com.jamiescode.grazer.theme.grazerTheme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
