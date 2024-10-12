@@ -1,10 +1,15 @@
 package com.jamiescode.grazer.login.domain.usecase
 
+import com.jamiescode.grazer.login.domain.repository.AuthRepository
+import com.jamiescode.grazer.login.domain.repository.LoginRepository
 import javax.inject.Inject
 
 class LoginUseCase
     @Inject
-    constructor() {
+    constructor(
+        private val loginRepository: LoginRepository,
+        private val authRepository: AuthRepository,
+    ) {
         sealed class Result {
             data class Success(
                 val authToken: String,
@@ -16,10 +21,23 @@ class LoginUseCase
         }
 
         suspend fun execute(
-            username: String,
+            email: String,
             password: String,
         ): Result {
-            // Perform login request here
-            return Result.Success("authToken:$username:$password")
+            val result = loginRepository.login(email, password)
+
+            val statusCode = result.status ?: 0
+            val authToken = result.auth?.data?.authToken ?: ""
+
+            if (statusCode == STATUS_OK && authToken.isNotBlank()) {
+                authRepository.setAuthToken(authToken)
+                return Result.Success(authToken)
+            } else {
+                return Result.Error(Exception("Login failed with status code: $statusCode"))
+            }
+        }
+
+        companion object {
+            private const val STATUS_OK = 200
         }
     }

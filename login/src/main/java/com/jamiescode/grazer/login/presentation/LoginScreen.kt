@@ -36,48 +36,43 @@ fun loginScreen(viewModel: LoginViewModel = hiltViewModel()) {
         )
 
     when (val value = state.value) {
-        is LoginViewModel.State.Idle -> { loginContent(viewModel) }
-        is LoginViewModel.State.Error -> { loginContent(viewModel, value) }
-        is LoginViewModel.State.Loading -> { loadingContent() }
+        is LoginViewModel.State.Idle -> {
+            loginContent(viewModel)
+        }
+        is LoginViewModel.State.Error -> {
+            loginContent(viewModel, value)
+        }
+        is LoginViewModel.State.Loading -> {
+            loadingContent()
+        }
     }
 }
 
 @Composable
-private fun loginContent(viewModel: LoginViewModel, error: LoginViewModel.State.Error? = null) {
+private fun loginContent(
+    viewModel: LoginViewModel,
+    error: LoginViewModel.State.Error? = null,
+) {
     val keyboardController = LocalSoftwareKeyboardController.current
-    var username by remember { mutableStateOf(TextFieldValue("")) }
+    var email by remember { mutableStateOf(TextFieldValue("")) }
     var password by remember { mutableStateOf(TextFieldValue("")) }
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(32.dp),
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(32.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Text(
-            text = "Welcome to Grazer",
-            style = MaterialTheme.typography.displayMedium,
-            textAlign = TextAlign.Center,
-        )
-        Spacer(modifier = Modifier.height(32.dp))
-        Text(
-            text = "THE HOME OF PLANT-BASED CONNECTION",
-            style = MaterialTheme.typography.headlineSmall,
-            textAlign = TextAlign.Center,
-        )
+        textHeadings()
         Spacer(modifier = Modifier.height(32.dp))
         OutlinedTextField(
             textStyle = MaterialTheme.typography.bodyLarge,
-            value = username,
-            onValueChange = { newText -> username = newText },
+            value = email,
+            onValueChange = { newText -> email = newText },
             maxLines = 1,
-            label = {
-                Text(
-                    text = "Username",
-                    style = MaterialTheme.typography.bodyLarge,
-                )
-            },
+            label = { inputLabel("Email") },
         )
         Spacer(modifier = Modifier.height(32.dp))
         OutlinedTextField(
@@ -86,12 +81,7 @@ private fun loginContent(viewModel: LoginViewModel, error: LoginViewModel.State.
             onValueChange = { newText -> password = newText },
             maxLines = 1,
             visualTransformation = PasswordVisualTransformation(),
-            label = {
-                Text(
-                    text = "Password",
-                    style = MaterialTheme.typography.bodyLarge,
-                )
-            },
+            label = { inputLabel("Password") },
             supportingText = {
                 val errorMessage = error?.message ?: ""
                 if (errorMessage.isNotEmpty()) {
@@ -101,14 +91,14 @@ private fun loginContent(viewModel: LoginViewModel, error: LoginViewModel.State.
                         color = MaterialTheme.colorScheme.error,
                     )
                 }
-            }
+            },
         )
         Spacer(modifier = Modifier.height(32.dp))
         Button(
             onClick = {
-                viewModel.login(username.text, password.text)
+                viewModel.login(email.text, password.text)
                 // Reset UI
-                username = TextFieldValue("")
+                email = TextFieldValue("")
                 password = TextFieldValue("")
                 keyboardController?.hide()
             },
@@ -119,6 +109,29 @@ private fun loginContent(viewModel: LoginViewModel, error: LoginViewModel.State.
             )
         }
     }
+}
+
+@Composable
+private fun textHeadings() {
+    Text(
+        text = "Welcome to Grazer",
+        style = MaterialTheme.typography.displayMedium,
+        textAlign = TextAlign.Center,
+    )
+    Spacer(modifier = Modifier.height(32.dp))
+    Text(
+        text = "THE HOME OF PLANT-BASED CONNECTION",
+        style = MaterialTheme.typography.headlineSmall,
+        textAlign = TextAlign.Center,
+    )
+}
+
+@Composable
+private fun inputLabel(text: String) {
+    Text(
+        text = text,
+        style = MaterialTheme.typography.bodyLarge,
+    )
 }
 
 @Composable
