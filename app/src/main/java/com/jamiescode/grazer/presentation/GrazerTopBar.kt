@@ -1,4 +1,4 @@
-package com.jamiescode.grazer.presentation.composable
+package com.jamiescode.grazer.presentation
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.CenterAlignedTopAppBar

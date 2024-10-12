@@ -23,5 +23,6 @@ rootProject.name = "Grazer"
 include(
     ":app",
     ":navigation",
+    ":login",
     ":theme",
 )
