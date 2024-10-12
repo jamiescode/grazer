@@ -10,12 +10,12 @@ plugins {
 
 android {
     namespace = "com.jamiescode.grazer"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.jamiescode.grazer"
         minSdk = 26
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
