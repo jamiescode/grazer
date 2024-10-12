@@ -1,4 +1,4 @@
-package com.jamiescode.grazer.presentation.theme
+package com.jamiescode.grazer.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -12,35 +12,35 @@ import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme =
     darkColorScheme(
-        primary = Green,
+        primary = Green, // button
         secondary = Red,
-        tertiary = Blue,
-        background = White,
-        surface = White,
-        onPrimary = Black,
-        onSecondary = Black,
-        onTertiary = Black,
-        onBackground = Black,
+        tertiary = Red,
+        background = Black, // screen background
+        surface = Black, // top app bar background
+        onPrimary = White, // text on primary (button)
+        onSecondary = Red,
+        onTertiary = Red,
+        onBackground = White, // text on background
     )
 
 private val LightColorScheme =
     lightColorScheme(
-        primary = Green,
+        primary = Green, // button
         secondary = Red,
-        tertiary = Blue,
-        background = White,
-        surface = White,
-        onPrimary = Black,
-        onSecondary = Black,
-        onTertiary = Black,
-        onBackground = Black,
+        tertiary = Red,
+        background = White, // screen background
+        surface = White, // top app bar background
+        onPrimary = White, // text on primary (button)
+        onSecondary = Red,
+        onTertiary = Red,
+        onBackground = Black, // text on background
     )
 
 @Composable
 fun grazerTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit,
 ) {
     val colorScheme =
