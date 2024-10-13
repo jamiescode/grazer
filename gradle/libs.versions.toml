@@ -17,6 +17,7 @@ glide = "1.0.0-beta01"
 timber = "5.0.1"
 coroutines = "1.9.0"
 compose = "1.7.3"
+lottie = "6.5.2"
 
 # Testing
 junit4 = "4.13.2"
@@ -32,6 +33,7 @@ navigation-test = "2.8.2"
 datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
 glide = { module = "com.github.bumptech.glide:compose", version.ref = "glide" }
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
+lottie = { module = "com.airbnb.android:lottie-compose", version.ref = "lottie" }
 
 # Compose BOM
 compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }

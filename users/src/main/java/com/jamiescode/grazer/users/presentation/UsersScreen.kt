@@ -1,5 +1,6 @@
 package com.jamiescode.grazer.users.presentation
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,6 +24,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,6 +34,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.asFlow
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.jamiescode.grazer.users.R
 import com.jamiescode.grazer.users.domain.User
 
 @Composable
@@ -60,6 +65,7 @@ fun usersScreen(viewModel: UsersViewModel = hiltViewModel()) {
 @Composable
 fun usersContent(users: List<User>) {
     val swipeUsers = users.toMutableList()
+    var showHeartAnimation by remember { mutableStateOf(false) }
 
     Column(
         modifier =
@@ -70,7 +76,11 @@ fun usersContent(users: List<User>) {
         Box(Modifier.weight(1f)) {
             noUsersMessage()
             swipeUsers.forEach { user ->
-                swipeCard {
+                swipeCard(
+                    onSwipeRight = {
+                        showHeartAnimation = true
+                    },
+                ) {
                     OutlinedCard(
                         modifier =
                             Modifier
@@ -99,6 +109,12 @@ fun usersContent(users: List<User>) {
                         }
                     }
                 }
+            }
+            this@Column.AnimatedVisibility(showHeartAnimation) {
+                oneTimeLottieAnimation(
+                    resource = LottieCompositionSpec.RawRes(R.raw.heart),
+                    onFinish = { showHeartAnimation = false },
+                )
             }
         }
         cardButtons()

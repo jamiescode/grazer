@@ -54,6 +54,9 @@ dependencies {
     // Glide
     implementation(libs.glide)
 
+    // Lottie
+    implementation(libs.lottie)
+
     testImplementation(libs.bundles.test)
     androidTestImplementation(libs.bundles.uitest)
 }
