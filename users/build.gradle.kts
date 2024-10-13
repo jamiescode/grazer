@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace = "com.jamiescode.grazer.login"
+    namespace = "com.jamiescode.grazer.users"
     compileSdk = 35
 
     defaultConfig {

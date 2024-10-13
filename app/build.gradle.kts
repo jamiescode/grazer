@@ -15,7 +15,6 @@ android {
     defaultConfig {
         applicationId = "com.jamiescode.grazer"
         minSdk = 26
-        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -44,6 +43,7 @@ dependencies {
     implementation(project(":navigation"))
     implementation(project(":login"))
     implementation(project(":theme"))
+    implementation(project(":users"))
 
     // Compose
     implementation(platform(libs.compose.bom))

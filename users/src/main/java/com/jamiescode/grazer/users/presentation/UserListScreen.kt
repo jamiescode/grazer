@@ -1,4 +1,4 @@
-package com.jamiescode.grazer.presentation
+package com.jamiescode.grazer.users.presentation
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row

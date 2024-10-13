@@ -22,7 +22,8 @@ dependencyResolutionManagement {
 rootProject.name = "Grazer"
 include(
     ":app",
-    ":navigation",
     ":login",
+    ":navigation",
     ":theme",
+    ":users",
 )
