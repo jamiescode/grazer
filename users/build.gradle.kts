@@ -42,7 +42,6 @@ dependencies {
     implementation(libs.bundles.compose)
     debugImplementation(libs.bundles.composeDebug)
     androidTestImplementation(platform(libs.compose.bom))
-    androidTestImplementation(libs.compose.ui.test.junit4)
 
     // Hilt
     implementation(libs.bundles.hilt)
