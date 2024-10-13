@@ -5,7 +5,7 @@ sealed class Destinations(
 ) {
     data object Login : Destinations(Routes.LOGIN.value)
 
-    data object UserList : Destinations(Routes.USERLIST.value)
+    data object Users : Destinations(Routes.USERS.value)
 
     data object Nowhere : Destinations("")
 }

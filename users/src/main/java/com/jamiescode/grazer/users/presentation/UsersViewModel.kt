@@ -1,42 +1,36 @@
-package com.jamiescode.grazer.login.presentation
+package com.jamiescode.grazer.users.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jamiescode.grazer.login.domain.usecase.LoginUseCase
-import com.jamiescode.grazer.navigation.AppNavigator
-import com.jamiescode.grazer.navigation.Destinations
+import com.jamiescode.grazer.users.domain.User
+import com.jamiescode.grazer.users.domain.usecase.GetUsersUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel
+class UsersViewModel
     @Inject
     constructor(
-        private val loginUseCase: LoginUseCase,
-        private val appNavigator: AppNavigator,
+        private val getUsersUseCase: GetUsersUseCase,
     ) : ViewModel() {
         private val stateMutableLiveData: MutableLiveData<State> by lazy {
-            MutableLiveData<State>(State.Idle)
+            MutableLiveData<State>(State.Loading)
         }
         val stateLiveData = stateMutableLiveData as LiveData<State>
 
-        fun login(
-            email: String,
-            password: String,
-        ) {
+        fun loadUsers() {
             stateMutableLiveData.postValue(State.Loading)
             viewModelScope.launch {
-                loginUseCase.execute(email, password).also {
+                getUsersUseCase.execute().also {
                     when (it) {
-                        is LoginUseCase.Result.Success -> {
-                            stateMutableLiveData.postValue(State.Idle)
-                            appNavigator.navigateTo(Destinations.Users)
+                        is GetUsersUseCase.Result.Success -> {
+                            stateMutableLiveData.postValue(State.Loaded(it.users))
                         }
 
-                        is LoginUseCase.Result.Error -> {
+                        is GetUsersUseCase.Result.Error -> {
                             // Get the reason from the api and pass it on
                             stateMutableLiveData.postValue(State.Error("Credentials are incorrect"))
                         }
@@ -46,9 +40,11 @@ class LoginViewModel
         }
 
         sealed class State {
-            data object Idle : State()
-
             data object Loading : State()
+
+            data class Loaded(
+                val users: List<User>,
+            ) : State()
 
             data class Error(
                 val message: String,

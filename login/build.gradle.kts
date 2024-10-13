@@ -51,6 +51,9 @@ dependencies {
     // Retrofit
     implementation(libs.bundles.retrofit)
 
+    // Data store preferences
+    implementation(libs.datastore.preferences)
+
     testImplementation(libs.bundles.test)
     androidTestImplementation(libs.bundles.uitest)
 }
