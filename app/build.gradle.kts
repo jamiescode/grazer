@@ -36,6 +36,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -50,12 +51,14 @@ dependencies {
     implementation(libs.bundles.compose)
     debugImplementation(libs.bundles.composeDebug)
     androidTestImplementation(platform(libs.compose.bom))
-    androidTestImplementation(libs.compose.ui.test.junit4)
 
     // Hilt
     implementation(libs.bundles.hilt)
     kapt(libs.hilt.compiler)
     androidTestImplementation(libs.hilt.testing)
+
+    // Timber
+    implementation(libs.timber)
 
     testImplementation(libs.bundles.test)
     androidTestImplementation(libs.bundles.uitest)
