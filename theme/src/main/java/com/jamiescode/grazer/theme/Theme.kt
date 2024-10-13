@@ -21,6 +21,7 @@ private val DarkColorScheme =
         onSecondary = Red,
         onTertiary = Red,
         onBackground = White, // text on background
+        outlineVariant = Black, // card border
     )
 
 private val LightColorScheme =
@@ -33,7 +34,8 @@ private val LightColorScheme =
         onPrimary = White, // text on primary (button)
         onSecondary = Red,
         onTertiary = Red,
-        onBackground = Black, // text on background
+        onBackground = Black, // text on background,
+        outlineVariant = Black, // card border
     )
 
 @Composable

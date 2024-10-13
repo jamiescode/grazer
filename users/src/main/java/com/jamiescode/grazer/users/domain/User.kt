@@ -11,6 +11,7 @@ data class User(
     val profileImageUrl: String,
     val diet: String = "Vegan",
     val relationshipStatus: String = "Single",
+    var swipeResult: Boolean? = null,
 ) {
     fun getAge(): Int {
         val localDate =
