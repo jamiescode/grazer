@@ -1,9 +1,8 @@
 [versions]
 agp = "8.7.0"
 kotlin = "2.0.21"
-junit = "4.13.2"
-junitVersion = "1.2.1"
-espressoCore = "3.6.1"
+
+espresso = "3.6.1"
 composeActivity = "1.9.2"
 composeBom = "2024.09.03"
 kotlinter = "4.4.1"
@@ -13,17 +12,28 @@ hilt = "2.52"
 compose-hilt-navigation = "1.2.0"
 retrofit = "2.11.0"
 okhttp-logging-interceptor = "4.12.0"
-coreKtx = "1.13.1"
-appcompat = "1.7.0"
-material = "1.12.0"
 datastore = "1.1.1"
 glide = "1.0.0-beta01"
+timber = "5.0.1"
+coroutines = "1.9.0"
+compose = "1.7.3"
+
+# Testing
+junit4 = "4.13.2"
+androidXJUnit = "1.2.1"
+androidx-test = "1.6.2"
+mockk = "1.13.13"
+kluent = "1.73"
+mockito = "5.14.1"
+core-testing = "2.2.0"
+navigation-test = "2.8.2"
 
 [libraries]
 datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
 glide = { module = "com.github.bumptech.glide:compose", version.ref = "glide" }
+timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 
-# Compose
+# Compose BOM
 compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
 compose-activity = { group = "androidx.activity", name = "activity-compose", version.ref = "composeActivity" }
 compose-ui = { group = "androidx.compose.ui", name = "ui" }
@@ -31,7 +41,6 @@ compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 compose-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
 
@@ -47,12 +56,20 @@ retrofit-converter-gson = { module = "com.squareup.retrofit2:converter-gson", ve
 okhttp-logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp-logging-interceptor" }
 
 # Testing
-junit = { group = "junit", name = "junit", version.ref = "junit" }
-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
-androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
-androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+junit5 = { module = "org.junit.jupiter:junit-jupiter", version = "5.11.2" }
+junit4 = { module = "junit:junit", version = "junit4" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidXJUnit" }
+androidx-test-runner = { module = "androidx.test:runner", version.ref = "androidx-test" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+kluent = { module = "org.amshove.kluent:kluent-android", version.ref = "kluent" }
+mockito = { module = "org.mockito:mockito-core", version.ref = "mockito" }
+test-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
+core-testing = { module = "androidx.arch.core:core-testing", version.ref = "core-testing" }
+
+# UI Testing
+espresso = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso" }
+navigation-test = { group = "androidx.navigation", name = "navigation-testing", version.ref = "navigation-test" }
+compose-ui-test = { group = "androidx.compose.ui", name = "ui-test-junit4", version.ref = "compose" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -78,8 +95,9 @@ retrofit = [
     "retrofit", "retrofit-converter-gson", "okhttp-logging-interceptor"
 ]
 test = [
-    "junit"
+    "junit5", "junit4", "androidx-junit", "androidx-test-runner",
+    "mockk", "kluent", "mockito", "test-coroutines", "core-testing",
 ]
 uitest = [
-    "junit", "compose-ui-test-junit4", "androidx-espresso-core",
+    "junit4", "junit5", "espresso", "androidx-test-runner", "hilt-testing", "compose-ui-test", "navigation-test"
 ]
