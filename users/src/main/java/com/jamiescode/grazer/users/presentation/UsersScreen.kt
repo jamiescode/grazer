@@ -34,10 +34,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.asFlow
-import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
-import com.airbnb.lottie.compose.animateLottieCompositionAsState
-import com.airbnb.lottie.compose.rememberLottieComposition
 import com.jamiescode.grazer.users.R
 import com.jamiescode.grazer.users.domain.User
 
@@ -137,32 +134,6 @@ private fun noUsersMessage() {
             text = "There are no more users to swipe. Try again later.",
             style = MaterialTheme.typography.headlineMedium,
             textAlign = TextAlign.Center,
-        )
-    }
-}
-
-@Composable
-private fun heartAnimation(onFinish: () -> Unit) {
-
-
-
-    val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.heart))
-    var isPlaying by remember { mutableStateOf(true) }
-    val progress by animateLottieCompositionAsState(composition, isPlaying)
-
-    if (progress == 1f) {
-        onFinish()
-        isPlaying = false
-    }
-
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        LottieAnimation(
-            composition= composition,
-            progress = { progress }
         )
     }
 }

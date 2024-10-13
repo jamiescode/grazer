@@ -37,8 +37,8 @@ fun oneTimeLottieAnimation(
         horizontalAlignment = horizontalAlignment,
     ) {
         LottieAnimation(
-            composition= composition,
-            progress = { progress }
+            composition = composition,
+            progress = { progress },
         )
     }
 }
