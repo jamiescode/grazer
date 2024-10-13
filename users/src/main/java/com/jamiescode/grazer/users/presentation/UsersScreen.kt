@@ -1,5 +1,6 @@
 package com.jamiescode.grazer.users.presentation
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,6 +24,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,6 +34,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.asFlow
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.animateLottieCompositionAsState
+import com.airbnb.lottie.compose.rememberLottieComposition
+import com.jamiescode.grazer.users.R
 import com.jamiescode.grazer.users.domain.User
 
 @Composable
@@ -60,6 +68,7 @@ fun usersScreen(viewModel: UsersViewModel = hiltViewModel()) {
 @Composable
 fun usersContent(users: List<User>) {
     val swipeUsers = users.toMutableList()
+    var showHeartAnimation by remember { mutableStateOf(false) }
 
     Column(
         modifier =
@@ -70,7 +79,11 @@ fun usersContent(users: List<User>) {
         Box(Modifier.weight(1f)) {
             noUsersMessage()
             swipeUsers.forEach { user ->
-                swipeCard {
+                swipeCard(
+                    onSwipeRight = {
+                        showHeartAnimation = true
+                    },
+                ) {
                     OutlinedCard(
                         modifier =
                             Modifier
@@ -100,6 +113,12 @@ fun usersContent(users: List<User>) {
                     }
                 }
             }
+            this@Column.AnimatedVisibility(showHeartAnimation) {
+                oneTimeLottieAnimation(
+                    resource = LottieCompositionSpec.RawRes(R.raw.heart),
+                    onFinish = { showHeartAnimation = false },
+                )
+            }
         }
         cardButtons()
     }
@@ -118,6 +137,32 @@ private fun noUsersMessage() {
             text = "There are no more users to swipe. Try again later.",
             style = MaterialTheme.typography.headlineMedium,
             textAlign = TextAlign.Center,
+        )
+    }
+}
+
+@Composable
+private fun heartAnimation(onFinish: () -> Unit) {
+
+
+
+    val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.heart))
+    var isPlaying by remember { mutableStateOf(true) }
+    val progress by animateLottieCompositionAsState(composition, isPlaying)
+
+    if (progress == 1f) {
+        onFinish()
+        isPlaying = false
+    }
+
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        LottieAnimation(
+            composition= composition,
+            progress = { progress }
         )
     }
 }

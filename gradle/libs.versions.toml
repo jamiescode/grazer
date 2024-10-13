@@ -18,10 +18,12 @@ appcompat = "1.7.0"
 material = "1.12.0"
 datastore = "1.1.1"
 glide = "1.0.0-beta01"
+lottie = "6.5.2"
 
 [libraries]
 datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
 glide = { module = "com.github.bumptech.glide:compose", version.ref = "glide" }
+lottie = { module = "com.airbnb.android:lottie-compose", version.ref = "lottie" }
 
 # Compose
 compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
