@@ -1,12 +1,12 @@
 package com.jamiescode.grazer.users.presentation
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Icon
@@ -15,7 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.jamiescode.grazer.users.R
@@ -26,81 +26,100 @@ fun userBio(
     user: User,
     modifier: Modifier,
 ) {
-    val bioSpacing = 6.dp
-    Column(modifier = modifier) {
-        Text(
-            text = user.name,
-            style = MaterialTheme.typography.titleLarge,
-        )
-        Spacer(modifier = Modifier.size(bioSpacing))
-        Column(
-            modifier =
-                Modifier
-                    .clip(RoundedCornerShape(8.dp))
-                    .background(MaterialTheme.colorScheme.secondary)
-                    .padding(8.dp),
-        ) {
-            userDiet(diet = user.diet)
-            Spacer(modifier = Modifier.size(bioSpacing))
-            userAge(age = user.getAge())
-            Spacer(modifier = Modifier.size(bioSpacing))
-            userRelationshipStatus(relationshipStatus = user.relationshipStatus)
+    Column(
+        modifier =
+            modifier
+                .background(MaterialTheme.colorScheme.secondary)
+                .padding(16.dp),
+    ) {
+        userDiet(user)
+        Spacer(modifier = Modifier.size(16.dp))
+        userAge(user)
+        Spacer(modifier = Modifier.size(16.dp))
+        userRelationshipStatus(user)
+    }
+}
+
+@Composable
+private fun userDiet(user: User) {
+    userAttributeRow(
+        text = user.diet,
+        icon =
+            UserAttributeIcon.DrawableIcon(
+                icon = R.drawable.plant,
+                contentDescription = "Diet",
+            ),
+    )
+}
+
+@Composable
+private fun userAge(user: User) {
+    userAttributeRow(
+        text = user.getAge().toString(),
+        icon =
+            UserAttributeIcon.DrawableIcon(
+                icon = R.drawable.cake,
+                contentDescription = "Age",
+            ),
+    )
+}
+
+@Composable
+private fun userRelationshipStatus(user: User) {
+    userAttributeRow(
+        text = user.relationshipStatus,
+        icon =
+            UserAttributeIcon.VectorIcon(
+                icon = Icons.Outlined.FavoriteBorder,
+                contentDescription = "Relationship Status",
+            ),
+    )
+}
+
+@Composable
+private fun userAttributeRow(
+    text: String,
+    icon: UserAttributeIcon,
+) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        val tint = MaterialTheme.colorScheme.onBackground
+        when (icon) {
+            is UserAttributeIcon.DrawableIcon -> {
+                Icon(
+                    painter = painterResource(id = icon.icon),
+                    contentDescription = icon.contentDescription,
+                    tint = tint,
+                )
+            }
+            is UserAttributeIcon.VectorIcon -> {
+                Icon(
+                    imageVector = icon.icon,
+                    contentDescription = icon.contentDescription,
+                    tint = tint,
+                )
+            }
         }
-    }
-}
-
-@Composable
-private fun userDiet(diet: String) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Icon(
-            painter = painterResource(id = R.drawable.plant),
-            contentDescription = "Diet",
-            tint = MaterialTheme.colorScheme.onBackground,
-        )
+        Spacer(modifier = Modifier.size(8.dp))
         Text(
-            text = diet,
-            style = MaterialTheme.typography.labelLarge,
+            text = text,
+            style = MaterialTheme.typography.titleLarge,
             modifier = Modifier.weight(1f),
         )
     }
 }
 
-@Composable
-private fun userAge(age: Int) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Icon(
-            painter = painterResource(id = R.drawable.cake),
-            contentDescription = "Age",
-            tint = MaterialTheme.colorScheme.onBackground,
-        )
-        Spacer(modifier = Modifier.size(4.dp))
-        Text(
-            text = age.toString(),
-            style = MaterialTheme.typography.labelLarge,
-            modifier = Modifier.weight(1f),
-        )
-    }
-}
+sealed class UserAttributeIcon(
+    open val contentDescription: String,
+) {
+    data class DrawableIcon(
+        @DrawableRes val icon: Int,
+        override val contentDescription: String,
+    ) : UserAttributeIcon(contentDescription)
 
-@Composable
-private fun userRelationshipStatus(relationshipStatus: String) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Icon(
-            imageVector = Icons.Outlined.FavoriteBorder,
-            contentDescription = "Age",
-            tint = MaterialTheme.colorScheme.onBackground,
-        )
-        Spacer(modifier = Modifier.size(4.dp))
-        Text(
-            text = relationshipStatus,
-            style = MaterialTheme.typography.labelLarge,
-            modifier = Modifier.weight(1f),
-        )
-    }
+    data class VectorIcon(
+        val icon: ImageVector,
+        override val contentDescription: String,
+    ) : UserAttributeIcon(contentDescription)
 }
