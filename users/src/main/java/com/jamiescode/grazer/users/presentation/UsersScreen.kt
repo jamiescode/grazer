@@ -3,8 +3,10 @@ package com.jamiescode.grazer.users.presentation
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -51,9 +53,13 @@ fun usersContent(users: List<User>) {
     LazyColumn(modifier = Modifier, state = listState, contentPadding = PaddingValues(bottom = 8.dp)) {
         items(items = users) { user ->
             Row(modifier = Modifier.padding(16.dp)) {
-                Text(
-                    text = user.name,
-                    style = MaterialTheme.typography.labelLarge,
+                userImage(
+                    imageUrl = user.profileImageUrl,
+                )
+                Spacer(modifier = Modifier.size(16.dp))
+                userBio(
+                    user = user,
+                    modifier = Modifier.weight(1f),
                 )
             }
         }

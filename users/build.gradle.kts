@@ -52,6 +52,9 @@ dependencies {
     // Retrofit
     implementation(libs.bundles.retrofit)
 
+    // Glide
+    implementation(libs.glide)
+
     testImplementation(libs.bundles.test)
     androidTestImplementation(libs.bundles.uitest)
 }
