@@ -9,7 +9,7 @@ plugins {
 
 android {
     namespace = "com.jamiescode.grazer.login"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 26
@@ -50,6 +50,9 @@ dependencies {
 
     // Retrofit
     implementation(libs.bundles.retrofit)
+
+    // Data store preferences
+    implementation(libs.datastore.preferences)
 
     testImplementation(libs.bundles.test)
     androidTestImplementation(libs.bundles.uitest)

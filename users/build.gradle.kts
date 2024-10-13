@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace = "com.jamiescode.grazer.navigation"
+    namespace = "com.jamiescode.grazer.users"
     compileSdk = 35
 
     defaultConfig {
@@ -34,6 +34,9 @@ android {
 }
 
 dependencies {
+    implementation(project(":navigation"))
+    implementation(project(":login"))
+
     // Compose
     implementation(platform(libs.compose.bom))
     implementation(libs.bundles.compose)
@@ -45,6 +48,12 @@ dependencies {
     implementation(libs.bundles.hilt)
     kapt(libs.hilt.compiler)
     androidTestImplementation(libs.hilt.testing)
+
+    // Retrofit
+    implementation(libs.bundles.retrofit)
+
+    // Glide
+    implementation(libs.glide)
 
     testImplementation(libs.bundles.test)
     androidTestImplementation(libs.bundles.uitest)
