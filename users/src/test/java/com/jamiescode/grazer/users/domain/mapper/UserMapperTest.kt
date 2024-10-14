@@ -14,7 +14,7 @@ class UserMapperTest {
         val userDto =
             UserDto(
                 name = "name",
-                dateOfBirth = 0L,
+                dateOfBirth = 1234567890L,
                 profileImageUrl = "profileImageUrl",
             )
 
@@ -25,7 +25,7 @@ class UserMapperTest {
         val user =
             User(
                 name = "name",
-                dateOfBirthEpochSeconds = 0L,
+                dateOfBirthEpochSeconds = 1234567890L,
                 profileImageUrl = "profileImageUrl",
             )
         assertEquals(listOf(user), result)

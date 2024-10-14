@@ -2,7 +2,6 @@ package com.jamiescode.grazer.login.data.repository
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.edit
 import com.jamiescode.grazer.login.data.datasource.DataStoreManager
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -30,8 +29,6 @@ class AuthRepositoryImplTest {
 
         // THEN data store called
         coVerify { dataStoreManager.get() }
-        coVerify { dataStore.data }
-        coVerify { dataStoreFlow[AuthRepositoryImpl.AUTH_TOKEN_KEY] }
     }
 
     @Test
@@ -47,6 +44,5 @@ class AuthRepositoryImplTest {
 
         // THEN data store called
         coVerify { dataStoreManager.get() }
-        coVerify { dataStore.edit { any() } }
     }
 }

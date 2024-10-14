@@ -37,6 +37,7 @@ dependencies {
     implementation(project(":navigation"))
     implementation(project(":login"))
     implementation(project(":theme"))
+    testImplementation(project(":testutils"))
 
     // Compose
     implementation(platform(libs.compose.bom))

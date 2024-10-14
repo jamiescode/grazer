@@ -10,6 +10,7 @@ import com.jamiescode.grazer.users.domain.usecase.GetUsersUseCase.Result
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
+import org.amshove.kluent.shouldBeInstanceOf
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -78,6 +79,8 @@ class GetUsersUseCaseTest {
         val result = runBlocking { useCase.execute() }
 
         // THEN
-        assertEquals(Result.Error(Exception("Get Users failed with status code: 404")), result)
+        result.shouldBeInstanceOf<Result.Error>()
+        val resultErrorMessage = (result as? Result.Error)?.e?.message
+        assertEquals("Get Users failed with status code: 404", resultErrorMessage)
     }
 }

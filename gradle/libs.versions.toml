@@ -28,6 +28,7 @@ kluent = "1.73"
 mockito = "5.14.1"
 core-testing = "2.2.0"
 navigation-test = "2.8.2"
+junitJupiterEngine = "5.11.2"
 
 [libraries]
 datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
@@ -67,6 +68,7 @@ kluent = { module = "org.amshove.kluent:kluent-android", version.ref = "kluent" 
 mockito = { module = "org.mockito:mockito-core", version.ref = "mockito" }
 test-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 core-testing = { module = "androidx.arch.core:core-testing", version.ref = "core-testing" }
+junitJupiterEngine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junitJupiterEngine" }
 
 # UI Testing
 espresso = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso" }

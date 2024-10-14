@@ -11,6 +11,7 @@ import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
+import org.amshove.kluent.shouldBeInstanceOf
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -70,7 +71,8 @@ class LoginUseCaseTest {
         // THEN
         coVerify { loginRepository.login(email, password) }
 
-        val expected = Result.Error(e = Exception(message = "Login failed with status code: 404"))
-        assertEquals(expected, result)
+        result.shouldBeInstanceOf<Result.Error>()
+        val resultErrorMessage = (result as? Result.Error)?.e?.message ?: ""
+        assertEquals("Login failed with status code: 404", resultErrorMessage)
     }
 }
