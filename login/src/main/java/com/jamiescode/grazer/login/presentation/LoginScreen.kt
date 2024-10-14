@@ -24,9 +24,11 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.asFlow
+import com.jamiescode.grazer.theme.grazerTheme
 
 @Composable
 fun loginScreen(viewModel: LoginViewModel = hiltViewModel()) {
@@ -37,10 +39,14 @@ fun loginScreen(viewModel: LoginViewModel = hiltViewModel()) {
 
     when (val value = state.value) {
         is LoginViewModel.State.Idle -> {
-            loginContent(viewModel)
+            loginContent { username: String, password: String ->
+                viewModel.login(username, password)
+            }
         }
         is LoginViewModel.State.Error -> {
-            loginContent(viewModel, value)
+            loginContent(value) { username: String, password: String ->
+                viewModel.login(username, password)
+            }
         }
         is LoginViewModel.State.Loading -> {
             loadingContent()
@@ -50,8 +56,8 @@ fun loginScreen(viewModel: LoginViewModel = hiltViewModel()) {
 
 @Composable
 private fun loginContent(
-    viewModel: LoginViewModel,
     error: LoginViewModel.State.Error? = null,
+    onLogin: (username: String, password: String) -> Unit,
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
     var email by remember { mutableStateOf(TextFieldValue("")) }
@@ -96,7 +102,7 @@ private fun loginContent(
         Spacer(modifier = Modifier.height(32.dp))
         Button(
             onClick = {
-                viewModel.login(email.text, password.text)
+                onLogin(email.text, password.text)
                 // Reset UI
                 email = TextFieldValue("")
                 password = TextFieldValue("")
@@ -113,17 +119,19 @@ private fun loginContent(
 
 @Composable
 private fun textHeadings() {
-    Text(
-        text = "Welcome to Grazer",
-        style = MaterialTheme.typography.displayMedium,
-        textAlign = TextAlign.Center,
-    )
-    Spacer(modifier = Modifier.height(32.dp))
-    Text(
-        text = "THE HOME OF PLANT-BASED CONNECTION",
-        style = MaterialTheme.typography.headlineSmall,
-        textAlign = TextAlign.Center,
-    )
+    Column {
+        Text(
+            text = "Welcome to Grazer",
+            style = MaterialTheme.typography.displayMedium,
+            textAlign = TextAlign.Center,
+        )
+        Spacer(modifier = Modifier.height(32.dp))
+        Text(
+            text = "THE HOME OF PLANT-BASED CONNECTION",
+            style = MaterialTheme.typography.headlineSmall,
+            textAlign = TextAlign.Center,
+        )
+    }
 }
 
 @Composable
@@ -141,5 +149,48 @@ private fun loadingContent() {
         contentAlignment = Alignment.Center,
     ) {
         CircularProgressIndicator()
+    }
+}
+
+@Preview
+@Composable
+fun loginContentPreview() {
+    grazerTheme {
+        Column {
+            loginContent(
+                error = LoginViewModel.State.Error("Something went wrong"),
+                onLogin = { _, _ -> },
+            )
+        }
+    }
+}
+
+@Preview
+@Composable
+fun textHeadingsPreview() {
+    grazerTheme {
+        Column {
+            textHeadings()
+        }
+    }
+}
+
+@Preview
+@Composable
+fun inputLabelPreview() {
+    grazerTheme {
+        Column {
+            inputLabel("Email")
+        }
+    }
+}
+
+@Preview
+@Composable
+fun loadingContentPreview() {
+    grazerTheme {
+        Column {
+            loadingContent()
+        }
     }
 }

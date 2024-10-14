@@ -1,24 +1,12 @@
 package com.jamiescode.grazer.users.presentation
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Close
-import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -29,12 +17,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.asFlow
 import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.jamiescode.grazer.theme.grazerTheme
 import com.jamiescode.grazer.users.R
 import com.jamiescode.grazer.users.domain.User
 
@@ -81,33 +70,7 @@ fun usersContent(users: List<User>) {
                         showHeartAnimation = true
                     },
                 ) {
-                    OutlinedCard(
-                        modifier =
-                            Modifier
-                                .fillMaxSize()
-                                .padding(start = 32.dp, top = 32.dp, end = 32.dp, bottom = 16.dp),
-                    ) {
-                        Column {
-                            Text(
-                                text = user.name,
-                                style = MaterialTheme.typography.headlineLarge,
-                                modifier =
-                                    Modifier
-                                        .fillMaxWidth()
-                                        .padding(16.dp),
-                                textAlign = TextAlign.Center,
-                            )
-                            userImage(
-                                imageUrl = user.profileImageUrl,
-                                modifier = Modifier.fillMaxWidth(),
-                            )
-                            Spacer(modifier = Modifier.size(16.dp))
-                            userBio(
-                                user = user,
-                                modifier = Modifier.weight(1f),
-                            )
-                        }
-                    }
+                    userCard(user)
                 }
             }
             this@Column.AnimatedVisibility(showHeartAnimation) {
@@ -117,7 +80,7 @@ fun usersContent(users: List<User>) {
                 )
             }
         }
-        cardButtons()
+        userCardButtons()
     }
 }
 
@@ -135,45 +98,6 @@ private fun noUsersMessage() {
             style = MaterialTheme.typography.headlineMedium,
             textAlign = TextAlign.Center,
         )
-    }
-}
-
-@Composable
-private fun cardButtons() {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceEvenly,
-        modifier =
-            Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-    ) {
-        val buttonSize = 76.dp
-        val iconSize = 64.dp
-        OutlinedButton(
-            contentPadding = PaddingValues(0.dp),
-            modifier = Modifier.size(buttonSize),
-            onClick = {},
-        ) {
-            Icon(
-                imageVector = Icons.Outlined.Close,
-                contentDescription = "Like",
-                tint = MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier.size(iconSize),
-            )
-        }
-        OutlinedButton(
-            contentPadding = PaddingValues(0.dp),
-            modifier = Modifier.size(buttonSize),
-            onClick = {},
-        ) {
-            Icon(
-                imageVector = Icons.Outlined.FavoriteBorder,
-                contentDescription = "Like",
-                tint = Color.Red,
-                modifier = Modifier.size(iconSize),
-            )
-        }
     }
 }
 
@@ -197,5 +121,53 @@ private fun loadingContent() {
         contentAlignment = Alignment.Center,
     ) {
         CircularProgressIndicator()
+    }
+}
+
+@Preview
+@Composable
+fun loadingContentPreview() {
+    grazerTheme {
+        Column {
+            loadingContent()
+        }
+    }
+}
+
+@Preview
+@Composable
+fun usersContentPreview() {
+    val user =
+        User(
+            name = "Joe Bloggs",
+            dateOfBirthEpochSeconds = 946684800L,
+            diet = "Vegan",
+            profileImageUrl = "https://thispersondoesnotexist.com/",
+            relationshipStatus = "Single",
+        )
+    grazerTheme {
+        Column {
+            usersContent(listOf(user))
+        }
+    }
+}
+
+@Preview
+@Composable
+fun noUsersMessagePreview() {
+    grazerTheme {
+        Column {
+            noUsersMessage()
+        }
+    }
+}
+
+@Preview
+@Composable
+fun errorContentPreview() {
+    grazerTheme {
+        Column {
+            errorContent()
+        }
     }
 }
