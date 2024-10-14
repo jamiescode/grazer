@@ -13,7 +13,7 @@ data class User(
     val relationshipStatus: String = "Single",
     var swipeResult: Boolean? = null,
 ) {
-    fun getAge(): Int {
+    fun getAge(now: LocalDate = LocalDate.now()): Int {
         val localDate =
             Instant
                 .ofEpochSecond(dateOfBirthEpochSeconds)
@@ -23,7 +23,7 @@ data class User(
         return Period
             .between(
                 localDate,
-                LocalDate.now(),
+                now,
             ).years
     }
 }

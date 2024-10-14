@@ -16,7 +16,7 @@ class AuthRepositoryImpl
         dataStoreManager: DataStoreManager,
     ) : AuthRepository {
         private val dataStore = dataStoreManager.get()
-        private val authTokenPrefKey = stringPreferencesKey("auth_token")
+        private val authTokenPrefKey = stringPreferencesKey(AUTH_TOKEN_KEY)
 
         override suspend fun getAuthToken(): Flow<String> =
             dataStore.data.map { preferences ->
@@ -27,5 +27,9 @@ class AuthRepositoryImpl
             dataStore.edit { preferences ->
                 preferences[authTokenPrefKey] = authToken
             }
+        }
+
+        companion object {
+            const val AUTH_TOKEN_KEY = "auth_token"
         }
     }
