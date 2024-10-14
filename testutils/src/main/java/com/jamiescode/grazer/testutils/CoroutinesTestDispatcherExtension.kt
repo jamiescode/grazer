@@ -15,7 +15,7 @@ import org.junit.jupiter.api.extension.ExtensionContext
  * Add this JUnit 5 extension to your test class using
  * @JvmField
  * @RegisterExtension
- * val coroutinesTestExtension = CoroutinesTestExtension()
+ * val coroutinesTestExtension = CoroutinesTestDispatcherExtension()
  */
 @ExperimentalCoroutinesApi
 class CoroutinesTestDispatcherExtension :
