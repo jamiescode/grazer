@@ -48,6 +48,7 @@ Each module follows this package structure:
 * Dependency injection - Dagger Hilt
 * Network requests - Retrofit, OkHttp, Coroutines
 * Architecture - Clean architecture
+* Animations - Material3, Lottie (for heart animation)
 * Code quality checks - Kotlinter, detekt, Android lint
 * Testing - JUnit 4/5, Mockk, Kluent, Mockito
 * UI Testing - Espresso
