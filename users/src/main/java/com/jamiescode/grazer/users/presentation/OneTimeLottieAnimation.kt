@@ -21,7 +21,7 @@ import com.airbnb.lottie.compose.rememberLottieComposition
 @Composable
 fun oneTimeLottieAnimation(
     resource: LottieCompositionSpec.RawRes,
-    verticalArrangement: Arrangement.Vertical = Arrangement.Bottom,
+    verticalArrangement: Arrangement.Vertical = Arrangement.Top,
     horizontalAlignment: Alignment.Horizontal = Alignment.CenterHorizontally,
     size: Dp = 128.dp,
     onFinish: () -> Unit,
