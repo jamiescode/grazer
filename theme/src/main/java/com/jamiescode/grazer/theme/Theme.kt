@@ -13,7 +13,7 @@ import androidx.compose.ui.platform.LocalContext
 private val DarkColorScheme =
     darkColorScheme(
         primary = Green, // button
-        secondary = Red,
+        secondary = RedDark, // bio section
         tertiary = Red,
         background = Black, // screen background
         surface = Black, // top app bar background
@@ -21,13 +21,13 @@ private val DarkColorScheme =
         onSecondary = Red,
         onTertiary = Red,
         onBackground = White, // text on background
-        outlineVariant = Black, // card border
+        outlineVariant = White, // card border
     )
 
 private val LightColorScheme =
     lightColorScheme(
         primary = Green, // button
-        secondary = Red,
+        secondary = Red, // bio section
         tertiary = Red,
         background = White, // screen background
         surface = White, // top app bar background

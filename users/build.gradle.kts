@@ -36,6 +36,7 @@ android {
 dependencies {
     implementation(project(":navigation"))
     implementation(project(":login"))
+    implementation(project(":theme"))
 
     // Compose
     implementation(platform(libs.compose.bom))
