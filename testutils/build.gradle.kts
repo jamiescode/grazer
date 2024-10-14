@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace = "com.jamiescode.grazer.login"
+    namespace = "com.jamiescode.grazer.testutils"
     compileSdk = 35
 
     defaultConfig {
@@ -34,27 +34,11 @@ android {
 }
 
 dependencies {
-    implementation(project(":navigation"))
-    implementation(project(":theme"))
-    testImplementation(project(":testutils"))
+    implementation(libs.bundles.test)
 
     // Compose
     implementation(platform(libs.compose.bom))
     implementation(libs.bundles.compose)
-    debugImplementation(libs.bundles.composeDebug)
-    androidTestImplementation(platform(libs.compose.bom))
 
-    // Hilt
-    implementation(libs.bundles.hilt)
-    kapt(libs.hilt.compiler)
-    androidTestImplementation(libs.hilt.testing)
-
-    // Retrofit
-    implementation(libs.bundles.retrofit)
-
-    // Data store preferences
-    implementation(libs.datastore.preferences)
-
-    testImplementation(libs.bundles.test)
-    androidTestImplementation(libs.bundles.uitest)
+    runtimeOnly(libs.junitJupiterEngine)
 }

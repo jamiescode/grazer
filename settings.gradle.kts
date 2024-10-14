@@ -25,5 +25,6 @@ include(
     ":login",
     ":navigation",
     ":theme",
+    ":testutils",
     ":users",
 )

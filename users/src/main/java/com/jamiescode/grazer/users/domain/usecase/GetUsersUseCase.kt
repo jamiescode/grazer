@@ -8,7 +8,7 @@ import javax.inject.Inject
 class GetUsersUseCase
     @Inject
     constructor(
-        private val usersRepository: UserRepository,
+        private val userRepository: UserRepository,
         private val userMapper: UserMapper,
     ) {
         sealed class Result {
@@ -22,7 +22,7 @@ class GetUsersUseCase
         }
 
         suspend fun execute(): Result {
-            val result = usersRepository.getUsers()
+            val result = userRepository.getUsers()
 
             val statusCode = result.status ?: 0
             val usersDto = result.data?.users ?: emptyList()
@@ -36,6 +36,6 @@ class GetUsersUseCase
         }
 
         companion object {
-            private const val STATUS_OK = 200
+            const val STATUS_OK = 200
         }
     }
