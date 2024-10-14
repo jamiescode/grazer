@@ -9,7 +9,7 @@
 [![Kotlin Version](https://img.shields.io/badge/Kotlin-2.0.x-blue.svg)](https://kotlinlang.org)
 [![AGP](https://img.shields.io/badge/AGP-8.x-blue?style=flat)](https://developer.android.com/studio/releases/gradle-plugin)
 [![Gradle](https://img.shields.io/badge/Gradle-8.x-blue?style=flat)](https://gradle.org)
-![Min SDK 26](https://img.shields.io/badge/Min%20SDK-24-839192?logo=android&logoColor=white)
+![Min SDK 26](https://img.shields.io/badge/Min%20SDK-26-839192?logo=android&logoColor=white)
 ![Target SDK 35](https://img.shields.io/badge/Target%20SDK-35-566573?logo=android&logoColor=white)
 [![Language: Kotlin](https://img.shields.io/github/languages/top/jamiescode/android-showcase.svg)](https://github.com/jamiescode/android-showcase/search?l=kotlin)
 
