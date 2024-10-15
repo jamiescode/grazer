@@ -86,5 +86,4 @@ There are many ways this project can be improved:
 * Implement screenshot testing
 * Implement JWT refresh
 * Improve swipe left/right UI
-* Fix UI bugs with login screen
-* Fix UI bugs with Lottie animation
+* Improve login screen UI
