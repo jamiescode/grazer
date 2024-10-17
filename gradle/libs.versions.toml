@@ -27,7 +27,7 @@ mockk = "1.13.13"
 kluent = "1.73"
 mockito = "5.14.2"
 core-testing = "2.2.0"
-navigation-test = "2.8.2"
+navigation-test = "2.8.3"
 junitJupiterEngine = "5.11.2"
 
 [libraries]
