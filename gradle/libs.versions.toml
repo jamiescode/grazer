@@ -4,7 +4,7 @@ kotlin = "2.0.21"
 
 espresso = "3.6.1"
 composeActivity = "1.9.2"
-composeBom = "2024.09.03"
+composeBom = "2024.10.00"
 kotlinter = "4.4.1"
 detekt = "1.23.7"
 navigationCompose = "2.8.3"
